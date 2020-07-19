@@ -303,10 +303,15 @@ amount of time only when a mismatch occurs. Let I = (R + 1)/2, z = 4 .*a 6,~, , 
 
 a=a,= 6 I . As a result of the mismatch C will move right until it finds the next
 tentative center. It will always be the case that if C moves s places to the right dt(x, a) =
-O(s). But  and (z, a) = 2s - 1 ( see Fig. 8). So the predictability condition will hold and
+O(s). But  and (z, a) = 2s - 1 ( see Fig. 1). So the predictability condition will hold and
 our algorithm can be made real time.
 
-FIG. 8. Before and after the mismatch.
+\begin{figure}[h]
+    \centerline{\includegraphics{./images/1.png}}
+    \caption{Before and after the mismatch.}
+    \label{fig}
+\end{figure}
+
 
 In the sequel we always assume that the palindrome which is sought has not been
 found, since otherwise we are done. Hence if match stops, then a mismatch has occurred.
@@ -352,17 +357,23 @@ Now assume that there is a chain CH that satisfies (a)-(c). Obviously D is a cen
 initial palindrome in [ and  RIR. By Lemma 3 it is the center of the largest one and thus
 D = C’. By (b) C’ - C < FE/4 and the chain case holds. 
 
-Figure 9 contains a flow diagram of the algorithm, and Fig. 10 describes different
+Figure 2 contains a flow diagram of the algorithm, and Fig. 3 describes different
 stages in discovering and maintaining the chain. Both figures are intended to help the
 reader in reading the following sections.
 
-FIG. 9. A flow diagram for main(C, Y). In fact main1 is called from move and not main but main1
-is similar to main. (The marked boxes cannot occur in main1 .) 
-
-
-FIG. 10. Discovering and maintaining the chain: tI , a dp is found; tz, right dp succeeds;
-t3 , after extending the chain in one period; t4 , an = ag a~ , C moves to c’; tS , after one iteration
-of steps 1 and 2, C moves to C”. 
+\begin{figure}[h]
+    \centerline{\includegraphics[width=0.5\textwidth]{./images/2.png}}
+    \caption{A flow diagram for main(C, Y). In fact main1 is called from move and not main but main1
+    is similar to main. (The marked boxes cannot occur in main1 .) }
+    \label{fig}
+\end{figure}
+\begin{figure}[h]
+    \centerline{\includegraphics{./images/3.png}}
+    \caption{Discovering and maintaining the chain: tI , a dp is found; tz, right dp succeeds;
+    t3 , after extending the chain in one period; t4 , an = ag a~ , C moves to c’; tS , after one iteration
+    of steps 1 and 2, C moves to C”}
+    \label{fig}
+\end{figure}
 
 \chapter{Finding the Chain}
 
