@@ -3,15 +3,13 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{wrapfig}
-
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \graphicspath{ {./images/} }
+
 \begin{document}
     
-
-
 \renewcommand\bibname{References}
 
 \titleformat{\chapter}{\bfseries\huge\centering}{}{0pt}{}{\huge}
@@ -99,7 +97,7 @@
 
 \chapter*{Abstract}
 
-A Turing machine is an abstract mathematical model of a computer. Recall that a Turing machinecan move back and forth in the working tape while reading and/or writing.There are several variants of Turing machines in the literature. Our variant of a Turing machineconsists of a finite-state control (also called the program), a read-only input tape where the inputis given and a working tape (also called memory) where computations are performed.In computing an answer, intermediate results are computed and kept in the working tape sothat it can be referenced later for further computations.
+A Turing machine is an abstract mathematical model of a computer.A Turing machine can move back and forth in the working tape while reading and/or writing.There are several variants of Turing machines in the literature. Our variant of a Turing machine consists of a finite-state control (also called the program), a read-only input tape where the input is given and a working tape (also called memory) where computations are performed.In computing an answer, intermediate results are computed and kept in the working tape so that it can be referenced later for further computations.
 
 \vspace{5pt}
 \textit{A real-time Turing machine algorithm that finds the smallest nontrivial initial palindrome in the input string is constructed. A small modification of this algorithm yields
@@ -143,10 +141,6 @@ No lemons, no melon.
 Sums are not set as a test on Erasmus.
 \end{center}
 
-
-These and many more can be found in [3]. A two-dimensional (5 x 5) eight-hundredyear-old palindrome (it also reads the same upwards and downwards) in Hebrew will
-be supplied by the author upon request.
-
 Formally, given an alphabet $\sum$, the set P = \{x $| x \epsilon \sum^{+}, x = x^R$\} is the language
 which consists of all the palindromes over $\sum$. ($x^R$ is the string x reversed.) If we restrict
 our attention to even (length) palindromes we get the language P’ = \{$x | x = ww^R,w \epsilon \sum^{+}\}$. 
@@ -154,7 +148,7 @@ Note that P and P’ are basically the same recognition problem. Any algorithm
 that recognizes P can be changed to one that recognizes P’ by intersecting with a regular
 set. Conversely, any algorithm that recognizes P’ can be changed to one which recognizes
 P by considering each symbol twice.
-The language P’ is a favorite example in language theory. For example, P’ is a contextfree language (cfl) which is not deterministic [12]. (The close relative, the set 
+The language P’ is a favorite example in language theory. For example, P’ is a context free language (cfl) which is not deterministic \cite{hopcroft}. (The close relative, the set 
 $\{x| x =wcw^R, w \epsilon \sum^{+}\}$, of P’ is a deterministic cfl.)
 
 
@@ -166,10 +160,10 @@ model. It is known that a one-tape Turing machine whose working tape is the inpu
 can accept P’ in time $O(n^{2})$; and every such machine that accepts P’ runs at least $cn^{2}$
 steps on infinitely many inputs. Also, it is known that a one-tape Turing machine whose
 working tape is not the input tape can accept P’ using O(log n) space; and every such
-machine that accepts P’ must use c log n space on infinitely many inputs [12].
+machine that accepts P’ must use c log n space on infinitely many inputs \cite{hopcroft}.
 
 On the other hand, it was quite surprising when Cole showed in 1964 how to recognize
-P’ in real time on an iterative array [4]. (See also [5].) Very recently Seiferas [16] defined
+P’ in real time on an iterative array \cite{cole}. Very recently Seiferas \cite{seiferas} defined
 an iterative array with central control and showed that it can be converted to a conventional
 iterative array with the same time behavior. Then he gave a five-instruction program for
 such a machine which recognizes P in real time. Both algorithms heavily use the ability
@@ -177,11 +171,11 @@ of the iterative array to consider all characters of the input simultaneously. T
 neither algorithm implies any of the fast algorithms for recognizing P mentioned below.
 Actually it is not known whether an iterative array can be simulated by a random access
 machine with no time loss. For example, an iterative array can multiply two n-bit numbers
-in real time [2], while no linear-time multiplication algorithm is known for a random
+in real time \cite{multiply}, while no linear-time multiplication algorithm is known for a random
 access machine.
 
 We now turn to the more popular computing models, the random access machine
-with unit cost (RAM) and the multitape Turing machine (Tm). Obviously, an off-line
+with unit cost (RAM) and the multi-tape Turing machine (Tm). Obviously, an off-line
 Tm can recognize P in time 2n. The more interesting problems are:
 
 Problem 1. ‘To recognize the language $\{ww^{R}u | w, u \epsilon \sum^{+}\}$;
@@ -191,10 +185,10 @@ ProbEem 2. To find all initial palindromes in a given string.
 These problems turn out to be closely related to the string-matching problem: Given X,
 y $ \epsilon \sum^{+}$, find the first (or all) occurrences of x in y. The discovery of the existence of a
 linear-time algorithm on a RAM for Problem 1 led to the discovery of a linear-time
-string-matching algorithm by Knuth et al., [13]. They also indicated how to solve
-Problem 2 in linear time on a RAM. Following [13], Fischer and Paterson showed how
-to do string-matching in linear time on a Tm [8]. Th e y used it to construct a linear-time
-algorithm for a Tm for Problem 2 (and hence also for Problem 1). Although their stringmatching algorithm is on line, the algorithm for Problem 2 is inherently off line: it
+string-matching algorithm by Knuth \cite{knuth}. They also indicated how to solve
+Problem 2 in linear time on a RAM. \cite{fischer} Fischer and Paterson showed how
+to do string-matching in linear time on a Tm. They used it to construct a linear-time
+algorithm for a Tm for Problem 2 (and hence also for Problem 1). Although their string matching algorithm is on line, the algorithm for Problem 2 is inherently off line: it
 matches x versus $x^R$ so it has to see the complete string first. They also indicated how to
 derive an O(n log n) on-line Tm algorithm for Problem 2. By on line we mean that the
 machine identifies the initial palindrome before it reads the symbols following it. In an
@@ -210,38 +204,17 @@ By real time we mean that the machine is on line and in addition it makes only a
 constant number of steps between two readings. (One step in the case of a Tm.) For
 formal definitions of on line and real time see Section 2.
 
-Manacher [14] presented an on-line linear-time RAM algorithm for palindrome
-recognition, settling Question a affirmatively in the case of the RAM. (It is interesting
-to note that the existence of such an algorithm could be derived using several theoretical
-results on fast simulations [9].) Manacher also conjectured that a real-time algorithm
-exists. In [lo] we defined the predictability condition, a sufficient condition for an on-line
-algorithm to be transformable into a real-time one. Manacher’s algorithm satisfies the
-condition. Hence his conjecture follows immediately. In a similar way, various stringmatching algorithms (for RAM and Tm) either satisfy the condition, or can be modified
-so that the condition holds. Thus, the predictability condition allowed us to settle
-affirmatively Question c [lo].
-
-In this paper we settle affirmatively the remaining questions, Questions a and 6 for Tm.
+In this paper we settle affirmatively the Questions a and b for Tm.
 We construct a real-time algorithm for Tm that finds the smallest nontrivial initial
-palindrome in the input string. (Nontriviality excludes the smallest initial palindrome
+palindrome in the input string. (Non-triviality excludes the smallest initial palindrome
 which always consists of the first input symbol.) We then indicate how to modify it so
 that it finds (in real time) all initial palindromes in the input string.
 
-These results are not completely original. We know of an existing paper by Slisenko
-that solves the same problems l-171. Daley [6] has translated it into English. Using
-Slisenko’s basic notion-the chain, and 4 of his 12 lemmas on strings, we were able to
-come up with a much shorter algorithm. At the very least we now have a much shorter
-and more comprehensible construction and proof. (Slisenko’s paper is 173 pages long.)
-
-The structure of the paper is as follows. In Section 2 we review some preyious definitions
-and results needed for the construction of the algorithm. In Section 3 we describe some
-properties of strings. All the concepts and most of the results in Section 3 are due to
-Slisenko. (All the other sections are original.) Section 4 is a sketch of the algorithm.
-Sections 5-7 describe in detail the major parts of the algorithm. 
 
 \chapter{Sketch Of algorithm}
 
 The algorithm will have a tentative center C (a head) and two heads L and R which
-move left and right, respectively, comparing symbols. If L hits the left endmarker a
+move left and right, respectively, comparing symbols. If L hits the left end marker a
 palindrome is found. The tentative center satisfies inductively the property that no place
 to its left can be the center of the initial palindrome that is currently being sought.
 (Note that in our case no place to the left of C can be the center of the smallest (nontrivial)
@@ -251,10 +224,10 @@ to the left of C that are centers of initial palindromes. But these palindromes 
 been found.) This process of matching symbols is performed by the procedure match
 defined below. Whenever match is called the string in (L, R) is a palindrome.
 
-procedure match
+Procedure match
 \begin{myindentpar}{2em}
-$
-while a_L=a_R do[L\leftarrow L-l,R \rightarrow R+l]$
+
+while $ a_L=a_R do[L\leftarrow L-l,R \rightarrow R+l]$
 \begin{myindentpar}{2em}
 
 if $a_L = \bar{a}_R (i.e.,$ they  match but  $L = 1)$
@@ -283,11 +256,11 @@ both Us and a, must be input symbols. The algorithm will spend more than a const
 amount of time only when a mismatch occurs. Let l = (R + 1)/2, z = $b_1 ... b_{l-1}$, and 
 $a=a_R= b_l I$ . As a result of the mismatch C will move right until it finds the next
 tentative center. It will always be the case that if C moves s places to the right dt(z, a) =
-O(s). But  dk(z, a) = 2s - 1 ( see Fig. 1). So the predictability condition will hold and
+O(s). But  dk(z, a) = 2s - 1 ( see Fig. 2.1). So the predictability condition will hold and
 our algorithm can be made real time.
 
 \begin{figure}[h]
-    \centerline{\includegraphics{./images/1.png}}
+    \centerline{\includegraphics[width=0.8\textwidth]{./images/1.png}}
     \caption{Before and after the mismatch.}
     \label{fig}
 \end{figure}
@@ -305,7 +278,7 @@ $C’ - C > k/4$ or the nonchain case.
 
 The following claim explains the nomenclature used above.
 
-Claim 1. The chain case holds and D = C’ if and only if there exists a chain CH
+\textbf{Claim 1.} The chain case holds and D = C’ if and only if there exists a chain CH
 such that
 
 (a) C and D are adjacent nodes of CH,
@@ -319,15 +292,15 @@ The case above will be referred to as the chain cake w.r.t. CH and C. Until a mi
 occurs we have enough time to discover the chain CH, if it exists, at least the part left
 of C. This is done in parallel to matching L and R. If such a chain is found the algorithm
 will take advantage of the symmetries of the chain in order to proceed. Otherwise the
-nonchain case holds. Using the FPP (the linear-time off-line procedure which finds
-all intial palindromes in a given string [8]), we find the largest initial palindrome in $[L, R]^R $.
+non-chain case holds. Using the FPP (the linear-time off-line procedure which finds
+all initial palindromes in a given string), we find the largest initial palindrome in $[L, R]^R $.
 (Note that a palindrome of size 1 always exists.) Let C’ and L’ be the center and the left
 end of this palindrome. We set C to C’ and L to L’ and continue. The time spent before
 reading the next input is O(k). But dk(z, a) $\geq$, k/2 - 1 as was explained above, since
 the tentative center moves at least k/4 places to the right. So the predictability condition
 holds. 
 
-Proof of Claim 1. Assume the chain case holds. So c’ - C $\leq $k/4. It is easy to see
+\emph{Proof of Claim 1.} Assume the chain case holds. So c’ - C $\leq $k/4. It is easy to see
 that C k-absorbs C’. By Corollary 1 and since C’ - C $\leq$ k/4, there is a chain CH such
 that C, C’ $\epsilon $ CH and (b) holds. C’ and C are adjacent nodes of CH since otherwise if
 there was another node, C”, in between them, then there would be a larger initial palindrome in $[L, R]^R$ with C”
@@ -337,18 +310,18 @@ Now assume that there is a chain CH that satisfies (a)-(c). Obviously D is a cen
 initial palindrome in $[L,R]^R$. By Lemma 3 it is the center of the largest one and thus
 D = C’. By (b) C’ - C $\leq$ k/4 and the chain case holds. 
 
-Figure 2 contains a flow diagram of the algorithm, and Fig. 3 describes different
+Figure 2.2 contains a flow diagram of the algorithm, and Figure 2.3 describes different
 stages in discovering and maintaining the chain. Both figures are intended to help the
 reader in reading the following sections.
 
 \begin{figure}[h]
-    \centerline{\includegraphics[width=0.5\textwidth]{./images/2.png}}
+    \centerline{\includegraphics[width=0.8\textwidth]{./images/2.png}}
     \caption{A flow diagram for main(C, r). In fact main1 is called from move and not main but main1
     is similar to main. (The marked boxes cannot occur in main1 .) }
     \label{fig}
 \end{figure}
 \begin{figure}[h]
-    \centerline{\includegraphics{./images/3.png}}
+    \centerline{\includegraphics[width=0.8\textwidth]{./images/3.png}}
     \caption{Discovering and maintaining the chain: $t_1$ , a dp is found; $t_2$, right dp succeeds;
     $t_3 $, after extending the chain in one period; $t_4$ , $a_D = a_R \neq a_L$ , C moves to c’; $t_5$ , after one iteration
     of steps 1 and 2, C moves to C”}
@@ -383,23 +356,23 @@ The string above is a dp. Note that there is a one-to-one correspondence between
 and ch.g.‘s with three places. (The step of the dp and the step of the corresponding ch.g.
 are the same.)
 
-Claim 2. Assume CH is a chain through C with h(CH) = h $>$ r and with at least
+\textbf{Claim 2.} Assume CH is a chain through C with h(CH) = h $>$ r and with at least
 three nodes to the left and three nodes to the right of C. Suppose CH is the chain with 
 the smallest step among such chains. Then the substring in places [C - 4h, C] is the smallest
 dp with step h $>$ r that ends at C.
 
-Proof. The string in places [C - 4h, C] is obviously a dp. Assume the smallest dp
+\emph{Proof of Claim 2}. The string in places [C - 4h, C] is obviously a dp. Assume the smallest dp
 which ends at C and with step h’$>$r satisfies h’$<$h. So there is a ch.g. through S =
 \{C - 3h’, C - 2h’, C - h’\}. Hence, there is a chain CH” through S with step h” which
 divides h’. Since C is 4h-symmetric, CH” passes through C and has at least three nodes
 to the right and three nodes to the left of C. By the definition of CH h”$\leq$r. Note that
 C + 2h’ $\epsilon$ CH”. So R$<$C + 2r$<$C + 2h’$<CH”^+$, contradicting condition (2). 
 
-Claim 3. Suppose the smallest dp that ends at C and has step$>$r has step h. Assume
+\textbf{Claim 3.} Suppose the smallest dp that ends at C and has step$>$r has step h. Assume
 in addition that C is 4h-symmetric. Then the places C + ih, -3$\leq$i$\leq$3, are consecutive
 nodes of a chain.
 
-Proof. Obviously these seven places form a ch.g. If they are not consecutive nodes
+\emph{Proof of Claim 3}. Obviously these seven places form a ch.g. If they are not consecutive nodes
 of a chain, there is a chain with step h’ through them (h’ divides h). Since the string in
 places [C - 4h’, C] is a dp, and h’$<$h, we have h’$\leq$r. The contradiction then follows
 as in Claim 2. 
@@ -408,8 +381,8 @@ Main(C, r) finds the chain with smallest step h$>$r with at least three nodes to
 and three nodes to the right of C by finding the smallest dp that ends at C with step$>$r.
 To find the latter it uses the procedure dp(C, r) defined below.
 
-procedure dp(C, r)
-\begin{myindentpar}{2em}
+Procedure dp(C, r)
+\begin{myindentpar}{4em}
 Find the smallest dp which ends at C with step$>$r by
 applying stages i = 1, 2,..., until a STOP occurs. The r symbols
 left of C are marked when the call is made.
@@ -433,7 +406,7 @@ Use two heads to check if for r$<$k$\leq |u_i| $l/4 there are initial
 palindromes of size 2k + 1 and 4k + 1 in $u_i^R$.
 
 If you find them (i.e., the pair with smallest K in this range)
-mark semiperiods (places C - k, C - 2k, C - 3k, C - 4k) and STOP
+mark semi-periods (places C - k, C - 2k, C - 3k, C - 4k) and STOP
 Otherwise if the stage is final STOP.
 
 \end{myindentpar}
@@ -473,7 +446,7 @@ the symmetric dp to the right of C. So if a mismatch occurs either in right-dp o
 dp(C, r) finds a dp, then the chain case cannot hold w.r.t. C and any chain CH through
 C: If h(CH)$<$r it cannot be the chain for the chain case since the conditions for main
 (C, r) hold, and by the discussion above there do not exist such chains through C with
-h(CH)$>$r. Hence in both cases the nonchain case must hold. As a result a call to move
+h(CH)$>$r. Hence in both cases the non-chain case must hold. As a result a call to move
 is executed. Move moves the tentative center to a new place C’$>$R + (R - C - 1)/4.
 It operates similarly to the description in the sketch of the algorithm. ,Note that if dp(C, r)
 stopped at the $i^{th}$ stage R - C$\geq  | u_{i-2}| $/2, since the i - 1 stage was completed. So the
@@ -491,8 +464,8 @@ are consecutive nodes of a chain. We denote the chain by CH (h(CH) = h).
 After these seven nodes of CH are found main finds the rest of CH as follows. (The
 need for keeping track of the chain information will become clear in the sequel.) It now
 runs a version of match which compares three symbols $a_L , a_R ,$ and $a_D$ . D is an extra
-head (not a search head) which moves back and forth along a semiperiod next to C.
-Endpoints of semiperiods are marked on the way by L and R.
+head (not a search head) which moves back and forth along a semi-period next to C.
+Endpoints of semi-periods are marked on the way by L and R.
 
 This stage continues as long as $a_D = a_L = a_R$ . Note that if at some point $a_R \neq a_D ,$
 then R = $CH^{+}$ + 1 and we shall say that $CH^{+}$ has been found. So this stage of extending
@@ -512,9 +485,9 @@ Consider Case (1). Since $CH^{+}$ was found, Claim l(c) implies that the chain c
 not hold w.r.t. CH. We now show that there is still enough time to find a new candidate
 for the chain case: Let r = $CH_{last}$ - C.
 
-Claim 4. The conditions for main(C, T) hold.
+\textbf{Claim 4.} The conditions for main(C, T) hold.
 
-Proof. Since R = $CH^{+}$ + 1, R - $CH_{last}\leq$2h. Also r$\geq$3h and hence r$<$R -
+\emph{Proof of Claim 4.} Since R = $CH^{+}$ + 1, R - $CH_{last}\leq$2h. Also r$\geq$3h and hence r$<$R -
 C$\leq$5r/3. So condition (1) holds. Note that $CH_{last}$ = C + r. By the first part of Lemma
 4,any other chain $\hat{CH}$ in which C is an interior node and with h($\hat{CH})\leq$r must satisfy
 h($\hat{CH})<$h. So, by the second part of Lemma 4, any such chain CH satisfies 
@@ -524,7 +497,7 @@ Hence, in Case (1) a call to main(C, I) is executed. Although the first r symbol
 not marked, the place C - r is marked and can easily be identified. So dp(C, r) will be
 able to mark 8~ places and to erase the old marks if its first stage is completed.
 
-We now consider Case (2). In Case (2a), the nonchain case must hold. The chain case
+We now consider Case (2). In Case (2a), the non-chain case must hold. The chain case
 cannot hold w.r.t.  and with h($\hat{CH}$)$<$, r, since  and $\hat{CH}^{+}<$R as in Claim4. (Recall Claim l(c).)
 It cannot hold w.r.t.  and  with h($\hat{CH})>$r since h($\hat{CH}$)$>$r$\geq$(R - C)/2 and there
 cannot be three nodes of $\hat{CH}$ between C and R. (Recall Claim l(b).) So a call to tlloete is
@@ -555,8 +528,8 @@ stops in a mismatch and D has not reached C it is rushed to the new center C’ 
 found by move during the call to move. We shall later use the fact that when main(C, r)
 is called D$>$L.
 
-(2’) In all other cases we can conclude as in Case (2a) that the nonchain case holds.
-So, similarly a call mowe is executed. 
+(2’) In all other cases we can conclude as in Case (2a) that the non-chain case holds.
+So, similarly a call move is executed. 
 
 
 
@@ -565,14 +538,14 @@ So, similarly a call mowe is executed.
 \chapter{The Procedure}
 
 To complete the construction we only have to describe the procedure move. It essentially
-operates as was described in the sketch of the algorithm for the nonchain case. In addition
+operates as was described in the sketch of the algorithm for the non-chain case. In addition
 it does some extra work which was not mentioned there. But the predictability condition
 will still hold. To define move we need the off-line version of main(C, r) which we denote
-by mainl(C, r). Main1 will be explained later.
+by main1(C, r). Main1 will be explained later.
 
 
 procedure move
-\begin{myindentpar}{2em}
+\begin{myindentpar}{4em}
 Comment: Find a place c’ for a new tentative center with
 C + (R - C - 1)/4 $<$ c’ $\leq$ R. Resume the match with the new center
 after cleaning the tape.
@@ -596,17 +569,17 @@ end
 Move finds the position for the tentative center, c’. But before resuming the match
 it needs the chain information, i.e., whether there is a chain through C’ with at least three
 nodes to its left and three nodes to its right, that in addition does not end before R
-(a candidate chain for the chain case). To find this information it calls mainl(C, 0) (C $\leftarrow$C
+(a candidate chain for the chain case). To find this information it calls main1(C, 0) (C $\leftarrow$C
 before this call).
 
-When mainl(C, r) is called R is not reading new symbols when it is increased by 1.
-Except the fact that mainl(C, r) operates off line it is exactly the same as main(C, r).
+When main1(C, r) is called R is not reading new symbols when it is increased by 1.
+Except the fact that main1(C, r) operates off line it is exactly the same as main(C, r).
 Eventually R reaches RR (which is marked). At this point main1 switches to the corresponding point in main. 
 
-Consider the call to mainl(C, 0). Note that no mismatch occurs until R reaches RR.
+Consider the call to main1(C, 0). Note that no mismatch occurs until R reaches RR.
 (C is (RR - C)-symmetric.) So before RR is reached if a chain with seven nodes is found
 the chain is extended. Only Case (1) can occur before reaching RR. (Cases (2a) and (2b)
-correspond to a mismatch.) In this case mainl(C, r) will becalled with the corresponding r.
+correspond to a mismatch.) In this case main1(C, r) will be called with the corresponding r.
 Hence R reaches RR in one of the following:
 
 (a) In the middle of dp(C, r)
@@ -617,7 +590,7 @@ Hence R reaches RR in one of the following:
 
 In all cases the corresponding procedure continues as though it was called from
 main(C, r). Note that the time it takes R to reach RR is O(RR - C), since main(C, r)
-and mainl(C, r) have the same run time and in the absence of a mismatch main is real time.
+and main(C, r) have the same run time and in the absence of a mismatch main is real time.
 In all the cases where move is called C’ - C $>$ (R - C - 1)/4. (In this paragraph L,
 R, and C refer to their value at the time of the call to move.) So dk(z, a) = 2(C’ - C) -
 1 $\geq$ (R - C)/2 - 1. In all these cases the distance of D and the search heads from c is
@@ -641,9 +614,9 @@ call main(C, 0)
 \chapter{Conclusion}
 
 
-We constructed a real-time algorithm for a multitape Turing machine for finding the
+We constructed a real-time algorithm for a multi-tape Turing machine for finding the
 smallest (nontrivial) initial palindrome. It can be easily changed into a real-time algorithm
-which finds all initial palindromes. Except in one subcase, when an initial palindrome is
+which finds all initial palindromes. Except in one sub-case, when an initial palindrome is
 found the machine prints 1 and then behaves as though a mismatch occurred and thus
 looks for the next initial palindrome. The only exception is in the case when an initial
 palindrome is found while having a chain CH and the chain case holds (Case (2b)).
@@ -658,13 +631,32 @@ algorithm which finds the smallest initial even palindrome can be easily transfo
 a real-time algorithm which recognizes L. The latter uses the former as a subroutine 
 which is called whenever an initial even palindrome is found. This obviously works in
 the case of a RAM. It works also in the case of a Turing machine. Recall that the real-time
-multihead Tm described above is converted into a real-time multitape Tm. So each
+multi-head Tm described above is converted into a real-time multi-tape Tm. So each
 head starts at the leftmost cell of the corresponding tape. Whenever an even palindrome is
-found each head marks the cell it scans. The marks will serve as left endmarkers of the
+found each head marks the cell it scans. The marks will serve as left end markers of the
 corresponding tapes. So the search for the next even palindrome starts over with the same
 initial conditions. 
 
 
-\bibliography{references}
+\begin{thebibliography}{9}
+    \bibitem{hopcroft}
+    J. E. HOPCROFT AND J. D. ULLMAN, “Formal Languages and Their Relation to Automata,” Addison-Wesley, Reading, Mass., 1969.
+
+    \bibitem{cole}
+    S. N. COLE, “Real-Time Computation by Iterative Arrays of Finite-State Machines,” Doctoral Thesis, HarvardUniv., Cambridge, Mass., August 1964.
+
+    \bibitem{seiferas}
+    J. I. SEIFERAS, Iterative arrays with direct central control, Acta Inform. 8 (1977), 177-192.
+
+    \bibitem{multiply}
+    A. J. ATRUBIN, A one-dimensional real-time iterative multiplier, IEEE Trans. Electron. Computers EC-14 (1965), 394-399. 
+
+    \bibitem{knuth}
+    E. E. KNUTH, J. H. MORRIS, AND V. R. PRATT, Fast pattern matching in strings, SIAM J. Computing 6 (1977), 323-350. 14. G. MANACHER, A new linear-time o
+
+    \bibitem{fischer}
+    M. J. FISCHER AND M. S. PATERSON, String matching and other products, in “SIAM AMS Proc. on Complexity of Computation” (R. M. Karp, Ed.), pp. 113-126, Amer. Math. Sot. Providence, R.I., 1974. 9. 2. GALIL, Two fast simulati
+
+\end{thebibliography}
 
 \end{document}
